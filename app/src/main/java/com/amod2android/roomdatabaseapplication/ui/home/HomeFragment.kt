@@ -48,6 +48,19 @@ class HomeFragment : Fragment() {
                 Log.d("4343",userDao.getAll().toString())
             }
         }
+
+        val btnDelete: Button = root.findViewById(R.id.buttonDelete)
+
+        btnDelete.setOnClickListener {
+            val db= DatabaseBuilder.getInstance(requireContext())
+            val userDao=db.getUserDao()
+
+            val user =User("amod","k.amod@sparken.net","")
+            lifecycleScope.launch {
+                userDao.insert(user).also {homeViewModel.setValue()}
+                Log.d("4343",userDao.getAll().toString())
+            }
+        }
         return root
     }
 }
